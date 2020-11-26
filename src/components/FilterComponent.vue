@@ -88,7 +88,17 @@ export default {
         },
         {
           name: 'Custom Range',
-          type: 'range',
+          type: 'radio',
+          options: [
+            {
+              id: Math.random(),
+              name: 'Opt 1',
+            },
+            {
+              id: Math.random(),
+              name: 'Opt 2',
+            }
+          ],
         },
       ],
     };
@@ -99,6 +109,9 @@ export default {
     },
     onChangeChild: function (value) {
       console.log(value)
+    },
+    onChangedCheckChild: function(value) {
+      console.log('checkbox' + value)
     }
   }
 }
