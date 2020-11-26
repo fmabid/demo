@@ -1,14 +1,15 @@
 <template>
   <div>
-    <div class="filter-box rounded-full bg-gray-300 py-2 px-6 mt-8 flex justify-between">
+    <div @click="toggleFilterOption" class="filter-box rounded-full bg-gray-300 py-2 px-6 mt-8 flex justify-between">
       <span><i class="fas fa-filter"></i> <span class="ml-2">Filter</span></span>
       <span><i class="fas fa-chevron-down"></i></span>
     </div>
-    <div class="dropdown-content bg-white py-8 px-8 mt-1 rounded">
+    <div class="dropdown-content bg-white py-8 px-8 mt-1 rounded" v-bind:class="{ show: isActive }">
       <div class="flex text-left">
         <FilterGroupComponent 
         v-for="item in groups" 
         :key="item.id"
+        @changed="onChangeChild"
         :optionType="item.type"
         :options="item.options"
         :groupName="item.name"/>
@@ -33,6 +34,7 @@ export default {
   },
   data() {
     return {
+      isActive: false,
       groups: [
         {
           name: 'Fleets',
@@ -93,7 +95,10 @@ export default {
   },
   methods: {
     toggleFilterOption: function() {
-
+      this.isActive = !this.isActive;
+    },
+    onChangeChild: function (value) {
+      console.log(value)
     }
   }
 }
@@ -109,10 +114,15 @@ export default {
 }
 
 .dropdown-content {
+  display: none;
   position: absolute;
   min-width: 160px;
   overflow: auto;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 100;
+}
+
+.show{
+  display: block;
 }
 </style>

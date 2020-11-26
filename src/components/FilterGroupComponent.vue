@@ -5,8 +5,17 @@
           
           <div class="mt-2 flex flex-col">
             <div v-for="option in options" :key="option.id" class="check">
-              <input :type="optionType" :id="option.id" :name="option.id" value="Bike">
-              <label v-bind:for="option.id"> {{ option.name }}</label><br>
+              <div v-if="optionType==='range'">
+                <input type="range" min="1" max="100" value="50">
+              </div>
+              <div v-else-if="optionType==='checkbox'">
+                <input type="checkbox" :id="option.id" :name="option.id" v-model="checkedNames">
+                <label v-bind:for="option.id"> {{ option.name }}</label><br>
+              </div>
+              <div v-else-if="optionType==='radio'">
+                <input v-on:change="changed" type="radio" :id="option.id" :name="option.id" v-model="radioValue">
+                <label v-bind:for="option.id"> {{ option.name }}</label><br>
+              </div>
             </div>
           </div>
         </div>
@@ -23,9 +32,16 @@ export default {
   },
   data() {
     return {
-      opts: Object.assign({}, this.options)
+      checkedNames: [],
+      radioValue: false,
+      range: '',
     };
   },
+  methods: {
+    changed : function() {
+      this.$emit('changed', this.radioValue);
+    },
+  }
 }
 </script>
 
