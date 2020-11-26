@@ -13,7 +13,7 @@
                 <label v-bind:for="option.id"> {{ option.name }}</label><br>
               </div>
               <div v-else-if="optionType==='radio'">
-                <input v-on:change="changed" type="radio" :id="option.id" :name="option.id" v-model="radioValue">
+                <input v-on:change="changed" type="radio" :id="option.id" :name="option.id" :value="option.id" v-model="radioValue">
                 <label v-bind:for="option.id"> {{ option.name }}</label><br>
               </div>
             </div>
@@ -33,7 +33,7 @@ export default {
   data() {
     return {
       checkedNames: [],
-      radioValue: false,
+      radioValue: '',
       range: '',
     };
   },
