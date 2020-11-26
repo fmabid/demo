@@ -10,7 +10,11 @@
       </div>
 
       <!-- filter -->
-      <FilterComponent/>
+      <div class="flex">
+        <FilterComponent @emitedObj="getObj"/>
+
+        <PopUpFilter v-for="obj in filters" :key="obj.id" :group="obj.group"/>
+      </div>
       <!-- filter -->
     </div>
   </div>
@@ -18,10 +22,22 @@
 
 <script>
 import FilterComponent from './FilterComponent';
+import PopUpFilter from './PopUpFilter';
 
 export default {
   name: 'HelloWorld',
-  components: {FilterComponent},
+  components: {FilterComponent, PopUpFilter},
+  data() {
+    return {
+      filters: '',
+    };
+  },
+  methods: {
+    getObj: function(val){
+      console.log(val);
+      this.filters = {...val};
+    },
+  }
 }
 </script>
 
@@ -42,5 +58,4 @@ export default {
   border: 0;
   outline: none;
 }
-
 </style>

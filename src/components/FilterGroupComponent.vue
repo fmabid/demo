@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="filter-group mr-12">
-          <p>{{ groupName }}</p>
+          <p class=" font-bold text-gray-700">{{ groupName }}</p>
           
           <div class="mt-2 flex flex-col">
             <div v-for="option in options" :key="option.id" class="check">
